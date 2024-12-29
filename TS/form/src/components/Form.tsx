@@ -47,6 +47,15 @@ export default function Form() {
       nameRef.current.focus();
     }
   }, []);
+  // tailwind css classes for the inputs
+  const inputClasses =
+    "border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit";
+  const ErrorlabelClasses =
+    "absolute text-red-500 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm transition-all ";
+  const labelClasses =
+    "absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm";
+  const buttonClasses =
+    "bg-blue-500 font-bold text-white w-full p-2 mt-3 rounded hover:bg-blue-600 hover:scale-x-105 transition-all ease-in  border-none";
 
   return (
     <div className="container p-4 flex flex-col gap-4 items-center justify-center bg-gray-900 h-screen w-screen">
@@ -67,22 +76,14 @@ export default function Form() {
               validateField("name", e.target.value, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, emailRef)}
-            className="border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit"
+            className={inputClasses}
           />
           {errors.name ? (
-            <label
-              className="absolute text-red-500 -top-4 text-xs left-0 cursor-text
-            peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1
-            peer-placeholder-shown:text-sm transition-all "
-              htmlFor="name"
-            >
+            <label className={ErrorlabelClasses} htmlFor="name">
               {errors.name}
             </label>
           ) : (
-            <label
-              className="absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm"
-              htmlFor="name"
-            >
+            <label className={labelClasses} htmlFor="name">
               Name
             </label>
           )}
@@ -100,22 +101,14 @@ export default function Form() {
               validateField("email", e.target.value, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, passwordRef)}
-            className="border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit"
+            className={inputClasses}
           />
           {errors.email ? (
-            <label
-              className="absolute text-red-500 -top-4 text-xs left-0 cursor-text
-            peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1
-            peer-placeholder-shown:text-sm transition-all "
-              htmlFor="email"
-            >
+            <label className={ErrorlabelClasses} htmlFor="email">
               {errors.email}
             </label>
           ) : (
-            <label
-              htmlFor="email"
-              className="absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm"
-            >
+            <label htmlFor="email" className={labelClasses}>
               Email
             </label>
           )}
@@ -133,22 +126,14 @@ export default function Form() {
               validateField("password", e.target.value, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
-            className="border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit"
+            className={inputClasses}
           />
           {errors.password ? (
-            <label
-              className="absolute text-red-500 -top-4 text-xs left-0 cursor-text
-            peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1
-            peer-placeholder-shown:text-sm transition-all "
-              htmlFor="password"
-            >
+            <label className={ErrorlabelClasses} htmlFor="password">
               {errors.password}
             </label>
           ) : (
-            <label
-              htmlFor="password"
-              className="absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm"
-            >
+            <label htmlFor="password" className={labelClasses}>
               Password
             </label>
           )}
@@ -165,30 +150,19 @@ export default function Form() {
               setData({ ...data, confirmPassword: e.target.value });
               validateField("confirmPassword", e.target.value, setErrors);
             }}
-            className="border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit"
+            className={inputClasses}
           />
           {errors.confirmPassword ? (
-            <label
-              className="absolute text-red-500 -top-4 text-xs left-0 cursor-text
-            peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1
-            peer-placeholder-shown:text-sm transition-all "
-              htmlFor="confirmPassword"
-            >
+            <label className={ErrorlabelClasses} htmlFor="confirmPassword">
               {errors.confirmPassword}
             </label>
           ) : (
-            <label
-              htmlFor="confirmPassword"
-              className="absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm"
-            >
+            <label htmlFor="confirmPassword" className={labelClasses}>
               Confirm Password
             </label>
           )}
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 font-bold text-white w-full p-2 mt-3 rounded hover:bg-blue-600 hover:scale-x-105 transition-all ease-in  border-none"
-        >
+        <button type="submit" className={buttonClasses}>
           Submit
         </button>
       </form>
