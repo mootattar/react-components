@@ -12,11 +12,11 @@ export const handleError = ({ name, email, password, confirmPassword }) => {
   if (!password?.trim()) {
     error.password = "Password is required";
   }
+  if (password !== confirmPassword) {
+    error.confirmPassword = "Passwords do not match";
+  }
   if (!confirmPassword?.trim()) {
     error.confirmPassword = "Confirm Password is required";
-  }
-  if (password !== confirmPassword) {
-    error.confirmPassword = "Password and Confirm Password do not match";
   }
   if (email && !isEmailValid(email)) {
     error.email = "Email is not valid";

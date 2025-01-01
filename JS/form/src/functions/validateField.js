@@ -1,23 +1,25 @@
-export const validateField = (name, value, setErrors) => {
+import { isEmailValid } from "./isEmailValid";
+
+export const validateField = (name, value, data, setErrors) => {
   let errorMessage = "";
 
   switch (name) {
     case "name":
-      if (value) errorMessage = "";
+      if (value.trim()) errorMessage = "";
       break;
     case "email":
-      if (value) errorMessage = "";
+      if ((value && !isEmailValid(value)) || !value)
+        errorMessage = "ex@mail.com";
       break;
     case "password":
-      if (value) errorMessage = "";
+      if (value.trim().length < 4) errorMessage = "at least 4 characters";
       break;
     case "confirmPassword":
-      if (value) errorMessage = "";
+      if (value !== data.password) errorMessage = "Passwords do not match";
       break;
     default:
       break;
   }
-
   setErrors((prevErrors) => ({
     ...prevErrors,
     [name]: errorMessage,

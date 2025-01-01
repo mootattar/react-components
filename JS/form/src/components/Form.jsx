@@ -55,21 +55,21 @@ export default function Form() {
   }, []);
 
   // tailwind css classes for the inputs
-  const inputClasses =
-    "border-b border-gray-300 py-1 rounded-sm focus:border-b-2 focus:border-blue-500 transition-colors focus:outline-none peer bg-inherit";
-  const ErrorlabelClasses =
-    "absolute text-red-500 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm transition-all ";
-  const labelClasses =
-    "absolute text-slate-200 -top-4 text-xs left-0 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-slate-400 peer-placeholder-shown:top-1 peer-placeholder-shown:text-sm";
-  const buttonClasses =
-    "bg-blue-500 font-bold text-white w-full p-2 mt-3 rounded hover:bg-blue-600 hover:scale-x-105 transition-all ease-in  border-none";
 
+  const inputClasses =
+    "peer border-2  w-full p-3 rounded-lg transition-colors focus:outline-none bg-inherit";
+  const ErrorlabelClasses =
+    "absolute text-red-500 left-4 -top-2 text-sm px-1 rounded-sm select-none font-bold cursor-text peer-focus:border-red-500 peer-focus:text-xs peer-focus:-top-2 peer-focus:bg-red-500 peer-focus:text-white peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-red-500 peer-placeholder-shown:text-sm transition-all peer-not-placeholder-shown:bg-red-500 peer-not-placeholder-shown:text-white peer-not-placeholder-shown:text-xs ";
+  const labelClasses =
+    "absolute text-slate-900 px-1 -top-2 text-sm left-4 cursor-text select-none rounded-sm peer-focus:bg-cyan-400 peer-focus:text-xs peer-focus:-top-2 transition-all peer-focus:text-slate-200 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-slate-900 peer-placeholder-shown:text-sm peer-not-placeholder-shown:bg-cyan-400 peer-not-placeholder-shown:text-slate-200 peer-not-placeholder-shown:text-xs";
+  const buttonClasses =
+    "bg-cyan-400 font-bold text-slate-200 w-full p-2 mt-3 rounded-xl hover:rounded-3xl hover:bg-cyan-500 transition-all ease-in ";
   return (
-    <div className="container p-4 flex flex-col gap-4 items-center justify-center bg-gray-900 h-screen w-screen">
-      <h1 className="text-2xl font-bold text-gray-50">Form</h1>
+    <div className="container p-4 flex flex-col gap-4 items-center justify-center bg-slate-200 h-screen w-screen">
+      <h1 className="text-2xl font-bold text-slate-900">Form</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 border-gray-50 border-2 p-8 rounded-lg text-white"
+        className="flex flex-col gap-4 border-slate-900 border-2 p-8 rounded-lg"
       >
         <div className="relative">
           <input
@@ -80,10 +80,16 @@ export default function Form() {
             value={data.name}
             onChange={(e) => {
               setData({ ...data, name: e.target.value });
-              validateField("name", e.target.value, setErrors);
+              validateField("name", e.target.value, data, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, emailRef)}
-            className={inputClasses}
+            className={`${inputClasses} ${
+              errors.name
+                ? "border-red-500 focus:border-red-500"
+                : data.name
+                ? "border-cyan-400"
+                : "border-slate-900"
+            }`}
           />
           {errors.name ? (
             <label className={ErrorlabelClasses} htmlFor="name">
@@ -105,10 +111,16 @@ export default function Form() {
             value={data.email}
             onChange={(e) => {
               setData({ ...data, email: e.target.value });
-              validateField("email", e.target.value, setErrors);
+              validateField("email", e.target.value, data, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, passwordRef)}
-            className={inputClasses}
+            className={`${inputClasses} ${
+              errors.email
+                ? "border-red-500 focus:border-red-500"
+                : data.email
+                ? "border-cyan-400"
+                : "border-slate-900"
+            }`}
           />
           {errors.email ? (
             <label className={ErrorlabelClasses} htmlFor="email">
@@ -124,16 +136,22 @@ export default function Form() {
         <div className="relative">
           <input
             type="password"
-            placeholder=""
             ref={passwordRef}
             id="password"
             value={data.password}
             onChange={(e) => {
               setData({ ...data, password: e.target.value });
-              validateField("password", e.target.value, setErrors);
+              validateField("password", e.target.value, data, setErrors);
             }}
             onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
-            className={inputClasses}
+            placeholder=" "
+            className={`${inputClasses} ${
+              errors.password
+                ? "border-red-500 focus:border-red-500"
+                : data.password
+                ? "border-cyan-400"
+                : "border-slate-900"
+            }`}
           />
           {errors.password ? (
             <label className={ErrorlabelClasses} htmlFor="password">
@@ -155,9 +173,15 @@ export default function Form() {
             value={data.confirmPassword}
             onChange={(e) => {
               setData({ ...data, confirmPassword: e.target.value });
-              validateField("confirmPassword", e.target.value, setErrors);
+              validateField("confirmPassword", e.target.value, data, setErrors);
             }}
-            className={inputClasses}
+            className={`${inputClasses} ${
+              errors.confirmPassword
+                ? "border-red-500 focus:border-red-500"
+                : data.confirmPassword
+                ? "border-cyan-400"
+                : "border-slate-900"
+            }`}
           />
           {errors.confirmPassword ? (
             <label className={ErrorlabelClasses} htmlFor="confirmPassword">

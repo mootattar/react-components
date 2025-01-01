@@ -1,5 +1,5 @@
 import { handleError } from "../functions/handleError";
-import { LoginData } from "../types/LoginData";
+import { LoginData } from "../types/LoginTypes";
 export const useFormValidation = () => {
   const handleSendData = (data: LoginData) => {
     const error = handleError(data);

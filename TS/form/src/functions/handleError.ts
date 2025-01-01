@@ -1,13 +1,12 @@
 import { isEmailValid } from "./isEmailValid";
-import { LoginData } from "../types/LoginData";
-
-export const handleError: (data: LoginData) => LoginData = ({
+import { Errors } from "../types/LoginTypes";
+export const handleError: (data: Errors) => Errors = ({
   name,
   email,
   password,
   confirmPassword,
 }) => {
-  const error: LoginData = {};
+  const error: Errors = {};
 
   if (!name?.trim()) {
     error.name = "Name is required";
@@ -18,11 +17,11 @@ export const handleError: (data: LoginData) => LoginData = ({
   if (!password?.trim()) {
     error.password = "Password is required";
   }
+  if (password !== confirmPassword) {
+    error.confirmPassword = "Passwords do not match";
+  }
   if (!confirmPassword?.trim()) {
     error.confirmPassword = "Confirm Password is required";
-  }
-  if (password !== confirmPassword) {
-    error.confirmPassword = "Password and Confirm Password do not match";
   }
   if (email && !isEmailValid(email)) {
     error.email = "Email is not valid";

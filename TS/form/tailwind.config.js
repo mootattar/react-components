@@ -4,5 +4,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("peer-not-placeholder-shown", "&:not(:placeholder-shown)");
+    },
+  ],
 };
